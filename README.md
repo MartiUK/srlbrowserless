@@ -23,3 +23,7 @@ Oh, and you can hit "q" at any time to quit.
 - Make it so the user can cancel quality selection without quitting the whole program
 - (Maybe) add an option so the user can copy the url of the current stream to their clipboard
 - (Maybe) make the cursor loop round at the top and bottom
+
+### NOTES ###
+
+- Bear in mind that twitch ads aren't actually part of the stream itself, so they won't be displayed. If you want to support a streamer, you'll have to subscribe to them.
