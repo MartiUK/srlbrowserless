@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import curses, HTMLParser, json, livestreamer, locale, re, scrolllist, subprocess, urllib2
 
