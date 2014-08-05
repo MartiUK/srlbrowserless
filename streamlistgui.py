@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import curses, HTMLParser, json, livestreamer, locale, re, scrolllist, subprocess, urllib2
+import argparse, curses, HTMLParser, json, livestreamer, locale, re, scrolllist, subprocess, urllib2
 
 #get all the streams, return a tuple of [tagline, name]
 def getStreams(length):
@@ -51,6 +51,11 @@ def loadStreams(yoffset, xoffset, padh, padw):
   streamlist = scrolllist.ScrollList(yoffset, xoffset, padh, padw, [x["tagline"] for x in streams])
   streamlist.refresh()
   return [streams, streamlist]
+
+#get some args
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--player", help="shell command for your chosen player, including any arguments you wish to pass forward (defaults to vlc if available)")
+args = parser.parse_args()
 
 #make sure people with stupid characters in their names don't crash the thing
 locale.setlocale(locale.LC_ALL,"")
@@ -125,7 +130,11 @@ while True:
       #clean up the window before showing the stream
       del qualitylist
       redraw(listwin, "Now viewing: " + url, padh, padw)
-      subprocess.call(["livestreamer", "-Q", "-p", "mpv", url, quality])
+      cmd = ["livestreamer", "-Q"]
+      if args.player:
+        cmd += ["-p", args.player]
+      cmd += [url, quality]
+      subprocess.call(cmd)
       streams, streamlist = loadStreams(yoffset, xoffset, padh, padw)
       streamselection = True
     elif cmd == ord("q"):
