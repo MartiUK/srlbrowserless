@@ -105,7 +105,7 @@ padh = curses.LINES - yoffset * 2
 # draw the window so we get a ~nice border~
 listwin = curses.newwin(
     yoffset + padh, xoffset + padw - 1, yoffset - 1, xoffset - 1)
-#need win-1, so use pad dims cos they're win-1
+# need win-1, so use pad dims cos they're win-1
 redraw(listwin, "Loading stream list...", padh, padw)
 
 # initialise the list
